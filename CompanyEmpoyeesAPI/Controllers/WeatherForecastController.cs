@@ -21,8 +21,8 @@ namespace CompanyEmpoyeesAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            _repository.Company.AnyMethodFromEmployeeRepository();
-            _repository.Employee.AnyMethodFromEmployeeRepository();
+            //_repository.Company.AnyMethodFromEmployeeRepository();
+            //_repository.Employee.AnyMethodFromEmployeeRepository();
             return new string[] { "value1", "value2" };
         }
     }
