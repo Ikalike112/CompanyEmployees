@@ -37,7 +37,12 @@ namespace CompanyEmpoyeesAPI
             services.ConfigureRepositoryManager();
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddControllers();
+            services.AddControllers(config =>
+            {
+                config.RespectBrowserAcceptHeader = true;
+                config.ReturnHttpNotAcceptable = true;
+            }).AddXmlDataContractSerializerFormatters()
+              .AddCustomCSVFormatter();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,

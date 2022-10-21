@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using CompanyEmpoyeesAPI.Formatters;
+using Contracts;
 using Contracts.Repository;
 using Entities;
 using LoggerService;
@@ -34,5 +35,8 @@ namespace CompanyEmpoyeesAPI.Extensions
         }
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
             services.AddScoped<IRepositoryManager, RepositoryManager>();
+        public static IMvcBuilder AddCustomCSVFormatter(this IMvcBuilder builder) =>
+            builder.AddMvcOptions(config => config.OutputFormatters.Add(new
+            CsvOutputFormatter()));
     }
 }
