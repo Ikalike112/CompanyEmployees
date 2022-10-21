@@ -1,7 +1,12 @@
 ﻿using Contracts;
+using Contracts.Repository;
+using Entities;
 using LoggerService;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Repository;
 
 namespace CompanyEmpoyeesAPI.Extensions
 {
@@ -21,5 +26,13 @@ namespace CompanyEmpoyeesAPI.Extensions
             });
         public static void ConfigureLoggerService(this IServiceCollection services) =>
             services.AddScoped<ILoggerManager, LoggerManager>();
+        public static void ConfigureSqlContext(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.AddDbContext<RepositoryContext>(opts =>
+                opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
+        }
+        public static void ConfigureRepositoryManager(this IServiceCollection services) =>
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
     }
 }
